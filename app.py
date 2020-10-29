@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # 3 /// is relative path. 4 //// is absolute path
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # initialising db
 db = SQLAlchemy(app)
 
@@ -31,7 +31,7 @@ def index():
         new_task = Todo(content=task_content)
 
         try:
-            db.session.add(task_content)
+            db.session.add(new_task)
             db.session.commit()
             return redirect('/')
         except:
@@ -67,7 +67,7 @@ def update(id):
         except:
             return 'There was a problem updating the task'
     else:
-        return render_template('update.html')
+        return render_template('update.html', task=task)
 
 
 if __name__ == "__main__":
