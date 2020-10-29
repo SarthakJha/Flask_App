@@ -35,7 +35,7 @@ def index():
             db.session.commit()
             return redirect('/')
         except:
-            return 'There was a server error (line:38)'
+            return 'There was a internal server error (line:38)'
 
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
